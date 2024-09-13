@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+
 class Program
 {
     static void Main(string[] args)
@@ -8,46 +10,18 @@ class Program
         var sw = new Stopwatch();
         //int[,] matrix = MatrixGenerate(900, 1000);
         //int[,] matrix2 = MatrixGenerate(900, 1000);
-        int[] array = ArrayGenerate(370000000);
-        var array1 = (int[])array.Clone();
+        //int[] array = ArrayGenerate(200);
+        //var array1 = (int[])array.Clone();
         sw.Start();
+        //int constanta = Const_function(array1);
         //int sum = Sum_numbers(array1);
         //int proizvedenie = Multiply_numbers(array1);
-        //int[] BSed_array = Bubblesort(array1);
+        //Bubblesort(array1);
         //Quicksort(array1, 0, array1.Length - 1);
         //Timsort(array1);
         //int[,] final_matrix = Matrix_Multiply(matrix, matrix2);
         sw.Stop();
-        Console.WriteLine("time: " + sw.ElapsedMilliseconds);
-    }
-    static void Quicksort(int[] array, int leftIndex, int rightIndex)
-    {
-        var l = leftIndex;
-        var r = rightIndex;
-        var pivot = array[leftIndex];
-        while (l <= r)
-        {
-            while (array[l] < pivot)
-            {
-                l++;
-            }
-            while (array[r] > pivot)
-            {
-                r--;
-            }
-            if (l <= r)
-            {
-                int temp = array[l];
-                array[l] = array[r];
-                array[r] = temp;
-                l++;
-                r--;
-            }
-        }
-        if (leftIndex < r)
-            Quicksort(array, leftIndex, r);
-        if (l < rightIndex)
-            Quicksort(array, l, rightIndex);
+        Console.WriteLine("time: " + sw.ElapsedTicks);
     }
     static void Bubblesort(int[] array)
     {
@@ -65,8 +39,38 @@ class Program
             }
         }
     }
+    static void Quicksort(int[] array, int leftIndex, int rightIndex)
+    {
+        var i = leftIndex;
+        var j = rightIndex;
+        var pivot = array[leftIndex];
+        while (i <= j)
+        {
+            while (array[i] < pivot)
+            {
+                i++;
+            }
+
+            while (array[j] > pivot)
+            {
+                j--;
+            }
+            if (i <= j)
+            {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        if (leftIndex < j)
+            Quicksort(array, leftIndex, j);
+        if (i < rightIndex)
+            Quicksort(array, i, rightIndex);
+    }
     static int min_merge = 32;
-    static void insertionSort(int[] array, int left, int right)
+    static void InsertionSort(int[] array, int left, int right)
     {
         for (int i = left + 1; i < right; i++)
         {
@@ -80,7 +84,7 @@ class Program
             array[j + 1] = key;
         }
     }
-    static void merge(int[] array, int l, int m, int r)
+    static void Merge(int[] array, int l, int m, int r)
     {
         int len1 = m - l + 1;
         int len2 = r - m;
@@ -126,7 +130,7 @@ class Program
     {
         for (int i = 0; i < array.Length; i += min_merge)
         {
-            insertionSort(array, i, Math.Min(i + min_merge - 1, array.Length - 1));
+            InsertionSort(array, i, Math.Min(i + min_merge - 1, array.Length - 1));
         }
         for (int size = min_merge; size < array.Length; size *= 2)
         {
@@ -136,7 +140,7 @@ class Program
                 int right = Math.Min(left + 2 * size, array.Length - 1);
                 if (mid < right)
                 {
-                    merge(array, left, mid, right);
+                    Merge(array, left, mid, right);
                 }
             }
         }
@@ -203,5 +207,15 @@ class Program
             result += array[i];
         }
         return result;
+    }
+    static int Const_function(int[] array)
+    {;
+        return array[0];
+    }
+    static float[] ArrayAverage(params float[][] arrays)
+    {
+        return Enumerable.Range(0, arrays[0].Length)
+                   .Select(i => arrays.Select(a => a.Skip(i).First()).Average())
+                   .ToArray();
     }
 }
