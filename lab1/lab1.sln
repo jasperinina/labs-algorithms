@@ -4,8 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab1", "lab1\lab1.csproj", "{64F9003A-D83F-4AE2-9195-0C93774CF10B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3731D538-7BB6-43D3-AFFE-994C5837A31C} = {3731D538-7BB6-43D3-AFFE-994C5837A31C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{37EA2AB1-637A-462D-92EC-8422B967C385}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3731D538-7BB6-43D3-AFFE-994C5837A31C} = {3731D538-7BB6-43D3-AFFE-994C5837A31C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "algorithms", "algorithms\algorithms.csproj", "{3731D538-7BB6-43D3-AFFE-994C5837A31C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,10 @@ Global
 		{37EA2AB1-637A-462D-92EC-8422B967C385}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37EA2AB1-637A-462D-92EC-8422B967C385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37EA2AB1-637A-462D-92EC-8422B967C385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3731D538-7BB6-43D3-AFFE-994C5837A31C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3731D538-7BB6-43D3-AFFE-994C5837A31C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3731D538-7BB6-43D3-AFFE-994C5837A31C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3731D538-7BB6-43D3-AFFE-994C5837A31C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
