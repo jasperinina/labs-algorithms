@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,7 @@ namespace Algorithms
     {
         public static int Const_function(int[] array)
         {
-            ;
-            return array[0];
+            return array[array.Length - 1];
         }
         public static int Sum_numbers(int[] array)
         {
