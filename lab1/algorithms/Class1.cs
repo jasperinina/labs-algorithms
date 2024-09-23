@@ -204,5 +204,64 @@ namespace Algorithms
                        .Select(i => arrays.Select(a => a.Skip(i).First()).Average())
                        .ToArray();
         }
+        public static long SimplePow(int x, int n)
+        {
+            long result = 1;
+            int count = 0;
+            while (count < n)
+            {
+                result *= x;
+                count++;
+            }
+            return result;
+        }
+        public static long RecPow (int x, int n)
+        {
+            long result = 1;
+            if (n != 0)
+            {
+                result = RecPow(x, n / 2);
+                if (n % 2 == 1)
+                {
+                    result = result * result * x;
+                }
+                else
+                {
+                    result *= result;
+                }
+            }
+            return result;
+        }
+        public static long QuickPowFaster (int x, int n)
+        {
+            long result;
+            if (n % 2 == 1) { result = x; }
+            else { result = 1; }
+            while (n != 0)
+            {
+                n /= 2;
+                x *= x;
+                if (n % 2 == 1) { result *= x; }
+            }
+            return result;
+        }
+        public static long QuickPowClassic (int x, int n)
+        {
+            long result = 1;
+            while (n != 0)
+            {
+                if (n % 2 == 0)
+                {
+                    x *= x;
+                    n /= 2;
+                }
+                else
+                {
+                    result *= x;
+                    n--;
+                }
+            }
+            return result;
+        }
     }
 }
