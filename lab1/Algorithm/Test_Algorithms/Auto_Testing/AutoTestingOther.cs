@@ -1,9 +1,8 @@
-﻿using Algorithm.Sorting_Algorithms;
-using Algorithm.Test_Algorithms;
-using Algorithm.Mathematical_Operations.Basic_Operation;
+﻿using Algorithm.Mathematical_Operations.Basic_Operation;
 using Algorithm.Mathematical_Operations.Polynomial_Operation;
+using Algorithm.Sorting_Algorithms;
 
-namespace Algorithm.Test_Algorithm.Auto_Testing;
+namespace Algorithm.Test_Algorithms.Auto_Testing;
 
 public class AutoTesterOther
     {
