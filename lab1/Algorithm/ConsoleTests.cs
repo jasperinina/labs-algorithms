@@ -30,7 +30,7 @@ namespace Algorithm
 
             // Тестирование сортировки пузырьком
             Console.WriteLine("\nТестирование пузырьковой сортировки:");
-            var bubbleSortResults = tester.TestSortingOperation(bubbleSort, maxSize: 100, stepSize: 10, iterations: 5);
+            var bubbleSortResults = tester.TestSortingOperation(bubbleSort, maxSize: 10000, stepSize: 1000, iterations: 5);
             foreach (var result in bubbleSortResults)
             {
                 Console.WriteLine($"Размер: {result.size}, Среднее время: {result.averageTime} мс");
@@ -38,7 +38,7 @@ namespace Algorithm
 
             // Тестирование быстрой сортировки
             Console.WriteLine("\nТестирование быстрой сортировки:");
-            var quickSortResults = tester.TestSortingOperation(quickSort, maxSize: 100, stepSize: 10, iterations: 5);
+            var quickSortResults = tester.TestSortingOperation(quickSort, maxSize: 10000, stepSize: 100, iterations: 5);
             foreach (var result in quickSortResults)
             {
                 Console.WriteLine($"Размер: {result.size}, Среднее время: {result.averageTime} мс");

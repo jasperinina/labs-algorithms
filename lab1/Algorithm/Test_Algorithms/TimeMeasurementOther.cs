@@ -21,7 +21,7 @@ public class TimeTrackerOther
                 totalTime += stopwatch.Elapsed.TotalMilliseconds;
             }
 
-            return totalTime / iterations; // Возвращаем среднее время выполнения
+            return (totalTime / iterations) / 1000.0; // Возвращаем среднее время выполнения
         }
 
         // Метод для измерения времени выполнения полиномиальной операции (PolynomialOperations)
@@ -38,7 +38,7 @@ public class TimeTrackerOther
                 totalTime += stopwatch.Elapsed.TotalMilliseconds;
             }
 
-            return totalTime / iterations;
+            return (totalTime / iterations) / 1000.0;
         }
 
         // Метод для измерения времени выполнения сортировки (SortingAlgorithm)
@@ -56,7 +56,7 @@ public class TimeTrackerOther
                 totalTime += stopwatch.Elapsed.TotalMilliseconds;
             }
 
-            return totalTime / iterations;
+            return (totalTime / iterations) / 1000.0;
         }
         
         // Метод для измерения времени выполнения матричной операции (умножение матриц)
@@ -73,6 +73,6 @@ public class TimeTrackerOther
                 totalTime += stopwatch.Elapsed.TotalMilliseconds;
             }
 
-            return totalTime / iterations;
+            return (totalTime / iterations) / 1000.0;
         }
     }

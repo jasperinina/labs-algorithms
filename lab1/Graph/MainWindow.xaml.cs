@@ -8,15 +8,25 @@ namespace Graph
         private string selectedCategory = "";
         private string selectedAlgorithm = "";
 
+        private GraphBuilder graphBuilder;
         private SortingTester sortingTester = new SortingTester();
         private MathTester mathTester = new MathTester();
         private MatrixTester matrixTester = new MatrixTester();
         private PowerTester powerTester = new PowerTester();
         private PolynomialTester polynomialTester = new PolynomialTester();
 
+        // Добавляем поля для хранения данных
+        private double[] dataSizes;
+        private double[] times;
+        private double[] exponents;
+        private double[] steps;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Инициализация GraphBuilder с передачей WpfPlot
+            graphBuilder = new GraphBuilder(wpfPlot);
         }
 
         // Метод для заполнения выпадающего списка алгоритмов в зависимости от выбранной категории
@@ -105,7 +115,8 @@ namespace Graph
         }
 
         // Показ полей ввода данных, когда выбран конкретный алгоритм
-        private void AlgorithmComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void AlgorithmComboBox_SelectionChanged(object sender,
+            System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (AlgorithmComboBox.SelectedIndex >= 0)
             {
@@ -153,39 +164,63 @@ namespace Graph
             }
         }
 
-        // Обработка нажатия на кнопку "Начать тестирование"
+        // Обновляем метод обработки результатов
         private void StartTestButton_Click(object sender, RoutedEventArgs e)
         {
-            string resultText = "";
+            // Очищаем область графиков
+            wpfPlot.Plot.Clear();
 
             switch (selectedCategory)
             {
                 case "Sorting":
-                    resultText = sortingTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                    sortingTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                    dataSizes = sortingTester.GetDataSizes();
+                    times = sortingTester.GetTimes();
+                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
                     break;
+
                 case "Math":
-                    resultText = mathTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                    mathTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                    dataSizes = mathTester.GetDataSizes();
+                    times = mathTester.GetTimes();
+                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
                     break;
-                case "Matrix":
-                    resultText = matrixTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
-                    break;
+
                 case "Power":
-                    resultText = powerTester.Test(selectedAlgorithm, GetBaseValue(), GetMaxExponent(), GetExponentStep());
+                    powerTester.Test(selectedAlgorithm, GetBaseValue(), GetMaxExponent(), GetExponentStep());
+                    exponents = powerTester.GetExponents();
+                    steps = powerTester.GetSteps();
+                    graphBuilder.PlotStepsVsExponent(exponents, steps); // Построение графика шагов vs. степени
                     break;
+
                 case "Polynomial":
-                    resultText = polynomialTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                    polynomialTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                    dataSizes = polynomialTester.GetDataSizes();
+                    times = polynomialTester.GetTimes();
+                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
+                    break;
+
+                case "Matrix":
+                    matrixTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                    dataSizes = matrixTester.GetDataSizes();
+                    times = matrixTester.GetTimes();
+                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
                     break;
             }
 
-            ResultTextBlock.Text = resultText;
+
         }
 
-        private int GetMaxData() => int.Parse(MaxDataTextBox.Text);
-        private int GetStepSize() => int.Parse(StepSizeTextBox.Text);
-        private int GetRepetitions() => int.Parse(RepetitionsTextBox.Text);
+        // Методы для получения данных из текстовых полей
+            private int GetMaxData() => int.Parse(MaxDataTextBox.Text);
+            private int GetStepSize() => int.Parse(StepSizeTextBox.Text);
+            private int GetRepetitions() => int.Parse(RepetitionsTextBox.Text);
 
-        private int GetBaseValue() => int.Parse(BaseTextBox.Text);
-        private int GetMaxExponent() => int.Parse(MaxExponentTextBox.Text);
-        private int GetExponentStep() => int.Parse(ExponentStepTextBox.Text);
+            private int GetBaseValue() => int.Parse(BaseTextBox.Text);
+            private int GetMaxExponent() => int.Parse(MaxExponentTextBox.Text);
+            private int GetExponentStep() => int.Parse(ExponentStepTextBox.Text);
     }
 }
+
+
+

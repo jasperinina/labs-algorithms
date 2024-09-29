@@ -7,27 +7,45 @@ public class MatrixTester
 {
     private AutoTesterOther tester = new AutoTesterOther();
 
-    public string Test(string algorithm, int maxData, int stepSize, int repetitions)
+    // Списки для хранения данных для графиков
+    private List<int> dataSizes = new List<int>();
+    private List<double> times = new List<double>();
+
+    public void Test(string algorithm, int maxData, int stepSize, int repetitions)
     {
-        string resultText = "";
+        // Очищаем предыдущие данные
+        dataSizes.Clear();
+        times.Clear();
 
         if (algorithm == "MatrixMultiply")
         {
             MatrixOperations matrixOps = new MatrixOperations();
             var matrixResults = tester.TestMatrixOperation(matrixOps.MatrixMultiply, maxData, stepSize, repetitions);
-            resultText = FormatResults(matrixResults);
+            StoreResults(matrixResults);
         }
-
-        return resultText;
     }
 
-    private string FormatResults(List<(int size, double averageTime)> results)
+    // Метод для сохранения данных для графика
+    private void StoreResults(List<(int size, double averageTime)> results)
     {
-        string resultText = "";
         foreach (var result in results)
         {
-            resultText += $"Размер матрицы: {result.size}, Среднее время: {result.averageTime} мс\n";
+            dataSizes.Add(result.size);
+            times.Add(result.averageTime);
         }
-        return resultText;
+    }
+
+    // Метод для получения размеров данных для графика
+    public double[] GetDataSizes()
+    {
+        return dataSizes.Select(s => (double)s).ToArray();
+    }
+
+    // Метод для получения времени выполнения для графика
+    public double[] GetTimes()
+    {
+        return times.ToArray();
     }
 }
+
+

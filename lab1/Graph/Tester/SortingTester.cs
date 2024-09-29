@@ -7,39 +7,57 @@ public class SortingTester
 {
     private AutoTesterOther tester = new AutoTesterOther();
 
-    public string Test(string algorithm, int maxData, int stepSize, int repetitions)
+    // Списки для хранения данных для графиков
+    private List<int> dataSizes = new List<int>();
+    private List<double> times = new List<double>();
+
+    public void Test(string algorithm, int maxData, int stepSize, int repetitions)
     {
-        string resultText = "";
+        // Очищаем предыдущие данные
+        dataSizes.Clear();
+        times.Clear();
 
         if (algorithm == "Bubble sort")
         {
             BubbleSort bubbleSort = new BubbleSort();
             var sortResults = tester.TestSortingOperation(bubbleSort, maxData, stepSize, repetitions);
-            resultText = FormatResults(sortResults);
+            StoreResults(sortResults);
         }
         else if (algorithm == "Quick sort")
         {
             QuickSort quickSort = new QuickSort();
             var sortResults = tester.TestSortingOperation(quickSort, maxData, stepSize, repetitions);
-            resultText = FormatResults(sortResults);
+            StoreResults(sortResults);
         }
         else if (algorithm == "TimSort")
         {
             TimSort timSort = new TimSort();
             var sortResults = tester.TestSortingOperation(timSort, maxData, stepSize, repetitions);
-            resultText = FormatResults(sortResults);
+            StoreResults(sortResults);
         }
-
-        return resultText;
     }
 
-    private string FormatResults(List<(int size, double averageTime)> results)
+    // Метод для сохранения данных для графика
+    private void StoreResults(List<(int size, double averageTime)> results)
     {
-        string resultText = "";
         foreach (var result in results)
         {
-            resultText += $"Размер: {result.size}, Среднее время: {result.averageTime} мс\n";
+            dataSizes.Add(result.size);
+            times.Add(result.averageTime);
         }
-        return resultText;
+    }
+
+    // Метод для получения размеров данных для графика
+    public double[] GetDataSizes()
+    {
+        return dataSizes.Select(s => (double)s).ToArray();
+    }
+
+    // Метод для получения времени выполнения для графика
+    public double[] GetTimes()
+    {
+        return times.ToArray();
     }
 }
+
+

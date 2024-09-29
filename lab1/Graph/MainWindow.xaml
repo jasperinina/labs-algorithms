@@ -1,21 +1,27 @@
 ﻿<Window x:Class="Graph.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Algorithm Testing" Height="450" Width="600">
+        xmlns:wpf="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
+        Height="900" Width="1600" ResizeMode="CanResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/> <!-- Колонка для ввода данных -->
+            <ColumnDefinition Width="*"/>   <!-- Колонка для графика -->
+        </Grid.ColumnDefinitions>
+
         <!-- Кнопки выбора категорий алгоритмов -->
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+        <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
             <TextBlock Text="Выберите категорию алгоритмов:" FontWeight="Bold" Margin="0,0,0,10"/>
             <Button Name="SortingButton" Content="Сортировка" Width="150" Height="30" Click="SortingButton_Click" Margin="0,0,0,10"/>
             <Button Name="MathButton" Content="Математические операции" Width="150" Height="30" Click="MathButton_Click" Margin="0,0,0,10"/>
             <Button Name="MatrixButton" Content="Матричные операции" Width="150" Height="30" Click="MatrixButton_Click" Margin="0,0,0,10"/>
             <Button Name="PowerButton" Content="Возведение в степень" Width="150" Height="30" Click="PowerButton_Click" Margin="0,0,0,10"/>
-            <Button Name="PolynomialButton" Content="Полиномы" Width="150" Height="30" Click="PolynomialButton_Click" />
+            <Button Name="PolynomialButton" Content="Полиномы" Width="150" Height="30" Click="PolynomialButton_Click"/>
 
         </StackPanel>
 
         <!-- Выпадающий список для выбора алгоритма -->
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,10,0,0">
+        <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,10,0,0">
             <TextBlock Text="Выберите алгоритм:" FontWeight="Bold" Margin="0,0,0,10"/>
             <ComboBox Name="AlgorithmComboBox" Width="200" SelectionChanged="AlgorithmComboBox_SelectionChanged"/>
 
@@ -45,7 +51,7 @@
             </StackPanel>
         </StackPanel>
 
-        <!-- Вывод результата -->
-        <TextBlock Name="ResultTextBlock" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Text="Результаты будут показаны здесь..." TextWrapping="Wrap" Width="550" Height="100"/>
+        <!-- График будет справа -->
+        <wpf:WpfPlot Grid.Column="1" x:Name="wpfPlot" Width="1100" Height="800" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>
