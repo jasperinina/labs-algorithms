@@ -12,7 +12,7 @@ public class AutoTesterPower
 
         for (int exponent = stepSize; exponent <= maxExponent; exponent += stepSize)
         {
-            var (_, stepCount) = powerOperation(baseValue, exponent); // Выполняем алгоритм возведения в степень и получаем количество шагов
+            var (_, stepCount) = powerOperation(baseValue, exponent);
             results.Add((exponent, stepCount));
 
             // Сохраняем данные для построения графиков
@@ -21,17 +21,5 @@ public class AutoTesterPower
         }
 
         return results;
-    }
-
-    // Метод для получения степеней для графика
-    public double[] GetExponents()
-    {
-        return exponents.Select(e => (double)e).ToArray(); // Преобразуем List<int> в double[]
-    }
-
-    // Метод для получения количества шагов для графика
-    public double[] GetSteps()
-    {
-        return steps.Select(s => (double)s).ToArray(); // Преобразуем List<int> в double[]
     }
 }
