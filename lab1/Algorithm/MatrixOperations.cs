@@ -9,7 +9,6 @@ public class MatrixOperations
         int cols = matrix2.GetLength(1);
         int innerDim = matrix1.GetLength(1);
         int[,] resultMatrix = new int[rows, cols];
-        int scalarResult = 0;
 
         // Умножаем матрицы и сохраняем в resultMatrix
         for (int i = 0; i < rows; i++)
@@ -22,11 +21,20 @@ public class MatrixOperations
                     sum += matrix1[i, k] * matrix2[k, j];
                 }
                 resultMatrix[i, j] = sum;
-                
+            }
+        }
+
+        // Рассчитываем сумму всех элементов результирующей матрицы
+        int scalarResult = 0;
+        
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
                 scalarResult += resultMatrix[i, j];
             }
         }
 
-        return scalarResult; 
+        return scalarResult; // Возвращаем одно число
     }
 }

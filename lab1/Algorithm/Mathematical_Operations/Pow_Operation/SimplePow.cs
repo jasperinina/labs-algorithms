@@ -6,14 +6,14 @@ public class SimplePow : PowerOperation
     public override (long result, int steps) CalculatePower(int x, int n)
     {
         long result = 1;
-        int steps = 0; 
-        
+        int steps = 0; // Счетчик шагов
+
         for (int i = 0; i < n; i++)
         {
             result *= x;
-            steps++; 
+            steps++; // Увеличиваем количество шагов
         }
 
-        return (result, steps); 
+        return (result, steps); // Возвращаем результат и количество шагов
     }
 }

@@ -28,7 +28,7 @@ public class AutoTesterOther
         {
             int[] data = dataGenerator.ArrayGenerate(size, 100);
 
-            // Измерение времени
+            // Измерение времени выполнения базовой операции
             double averageTime = timeTracker.MeasureExecutionTimeBasic(operation, iterations, data);
             results.Add((size, averageTime));
 
@@ -49,7 +49,7 @@ public class AutoTesterOther
         {
             double[] coefficients = dataGenerator.GeneratePolynomialCoefficients(size, 100.0);
 
-            // Измерение времени
+            // Измерение времени выполнения полиномиальной операции
             double averageTime = timeTracker.MeasureExecutionTimePolynomial(operation, iterations, 1.5, coefficients);
             results.Add((size, averageTime));
 
@@ -70,7 +70,7 @@ public class AutoTesterOther
         {
             int[] data = dataGenerator.ArrayGenerate(size, 100);
 
-            // Измерение времени
+            // Измерение времени выполнения сортировки
             double averageTime = timeTracker.MeasureExecutionTimeSorting(algorithm, iterations, data);
             results.Add((size, averageTime));
 
@@ -92,7 +92,7 @@ public class AutoTesterOther
             int[,] matrix1 = dataGenerator.MatrixGenerate(size, 100); 
             int[,] matrix2 = dataGenerator.MatrixGenerate(size, 100); 
 
-            // Измерение времени
+            // Измерение времени выполнения матричной операции, возвращающей одно число
             double averageTime = timeTracker.MeasureExecutionTimeMatrix((m1, m2) => matrixOperation(m1, m2), iterations, matrix1, matrix2);
             results.Add((size, averageTime));
 
@@ -102,5 +102,16 @@ public class AutoTesterOther
         }
 
         return results;
+    }
+
+    // Методы для получения данных для графика
+    public double[] GetDataSizes()
+    {
+        return dataSizes.Select(s => (double)s).ToArray();  // Преобразуем List<int> в double[]
+    }
+
+    public double[] GetTimes()
+    {
+        return times.ToArray();  // Возвращаем массив времени
     }
 }

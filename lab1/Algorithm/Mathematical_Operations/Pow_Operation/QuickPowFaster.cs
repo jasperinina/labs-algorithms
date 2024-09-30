@@ -15,7 +15,7 @@ public class QuickPowFaster : PowerOperation
 
         while (n > 0)
         {
-            steps++; 
+            steps++; // Увеличиваем количество шагов
             n /= 2;
             x *= x;
 
@@ -25,6 +25,6 @@ public class QuickPowFaster : PowerOperation
             }
         }
 
-        return (result, steps);
+        return (result, steps); // Возвращаем результат и количество шагов
     }
 }

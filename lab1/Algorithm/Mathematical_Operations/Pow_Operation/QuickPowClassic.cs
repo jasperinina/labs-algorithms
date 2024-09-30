@@ -6,11 +6,11 @@ public class QuickPowClassic : PowerOperation
     public override (long result, int steps) CalculatePower(int x, int n)
     {
         long result = 1;
-        int steps = 0; 
+        int steps = 0; // Счетчик шагов
 
         while (n > 0)
         {
-            steps++; 
+            steps++; // Увеличиваем количество шагов
 
             if (n % 2 == 1)
             {
@@ -20,6 +20,7 @@ public class QuickPowClassic : PowerOperation
             n /= 2;
         }
 
-        return (result, steps); 
+        return (result, steps); // Возвращаем результат и количество шагов
     }
 }
+    
