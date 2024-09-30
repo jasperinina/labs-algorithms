@@ -11,7 +11,7 @@ public class RecPow : PowerOperation
 
     private long RecursivePower(int x, int n, ref int steps)
     {
-        steps++; // Увеличиваем количество шагов
+        steps++; 
 
         if (n == 0)
             return 1;

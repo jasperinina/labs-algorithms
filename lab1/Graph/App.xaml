@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Graph"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <FontFamily x:Key="EuclidSquareSemiBold" />
     </Application.Resources>
 </Application>

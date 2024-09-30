@@ -59,5 +59,3 @@ public class SortingTester
         return times.ToArray();
     }
 }
-
-

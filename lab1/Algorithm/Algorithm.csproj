@@ -8,8 +8,4 @@
         <RootNamespace>Algorithm</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Personal_Algorithms\" />
-    </ItemGroup>
-
 </Project>

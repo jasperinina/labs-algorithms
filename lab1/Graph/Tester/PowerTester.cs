@@ -65,4 +65,3 @@ public class PowerTester
         return steps.Select(s => (double)s).ToArray();
     }
 }
-

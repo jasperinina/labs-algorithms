@@ -70,50 +70,36 @@ namespace Graph
         }
 
         // Обработчики кнопок выбора категорий
-        private void SortingButton_Click(object sender, RoutedEventArgs e)
+        private void SortingRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Sorting";
             PopulateAlgorithmComboBox();
-            HideInputFields();
         }
 
-        private void MathButton_Click(object sender, RoutedEventArgs e)
+        private void MathRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Math";
             PopulateAlgorithmComboBox();
-            HideInputFields();
         }
 
-        private void MatrixButton_Click(object sender, RoutedEventArgs e)
+        private void MatrixRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Matrix";
             PopulateAlgorithmComboBox();
-            HideInputFields();
         }
 
-        private void PowerButton_Click(object sender, RoutedEventArgs e)
+        private void PowerRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Power";
             PopulateAlgorithmComboBox();
-            HideInputFields();
         }
 
-        private void PolynomialButton_Click(object sender, RoutedEventArgs e)
+        private void PolynomialRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Polynomial";
             PopulateAlgorithmComboBox();
-            HideInputFields();
         }
-
-        // Метод для скрытия полей ввода до выбора алгоритма
-        private void HideInputFields()
-        {
-            InputFieldsPanel.Visibility = Visibility.Collapsed;
-            BaseTextBox.Visibility = Visibility.Collapsed;
-            MaxExponentTextBox.Visibility = Visibility.Collapsed;
-            ExponentStepTextBox.Visibility = Visibility.Collapsed;
-        }
-
+        
         // Показ полей ввода данных, когда выбран конкретный алгоритм
         private void AlgorithmComboBox_SelectionChanged(object sender,
             System.Windows.Controls.SelectionChangedEventArgs e)
@@ -221,6 +207,3 @@ namespace Graph
             private int GetExponentStep() => int.Parse(ExponentStepTextBox.Text);
     }
 }
-
-
-

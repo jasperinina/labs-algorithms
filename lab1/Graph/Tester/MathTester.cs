@@ -59,5 +59,3 @@ public class MathTester
         return times.ToArray();
     }
 }
-
-

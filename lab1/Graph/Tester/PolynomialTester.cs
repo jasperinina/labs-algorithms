@@ -53,5 +53,3 @@ public class PolynomialTester
         return times.ToArray();
     }
 }
-
-
