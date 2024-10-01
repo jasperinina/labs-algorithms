@@ -1,5 +1,5 @@
-﻿using Algorithm.Mathematical_Operations.Basic_Operation;
-using Algorithm.Test_Algorithms.Auto_Testing;
+﻿using Algorithm.Test_Algorithms.Auto_Testing;
+using Graph.Logic.Mathematical_Operations.Basic_Operation;
 
 namespace Graph.Tester;
 

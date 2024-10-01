@@ -1,5 +1,5 @@
-﻿using Algorithm.Mathematical_Operations.Pow_Operation;
-using Algorithm.Test_Algorithms.Auto_Testing;
+﻿using Graph.Logic.Mathematical_Operations.Pow_Operation;
+using Graph.Logic.Test_Algorithms.Auto_Testing;
 
 namespace Graph.Tester;
 

@@ -1,5 +1,5 @@
-﻿using Algorithm.Sorting_Algorithms;
-using Algorithm.Test_Algorithms.Auto_Testing;
+﻿using Algorithm.Test_Algorithms.Auto_Testing;
+using Graph.Logic.Sorting_Algorithms;
 
 namespace Graph.Tester;
 

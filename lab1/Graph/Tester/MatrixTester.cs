@@ -1,5 +1,5 @@
-﻿using Algorithm;
-using Algorithm.Test_Algorithms.Auto_Testing;
+﻿using Algorithm.Test_Algorithms.Auto_Testing;
+using Graph.Logic;
 
 namespace Graph.Tester;
 
