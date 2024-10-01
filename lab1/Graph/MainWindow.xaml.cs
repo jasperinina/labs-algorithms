@@ -53,7 +53,8 @@ namespace Graph
                 AlgorithmComboBox.Items.Add("Сортировка пузырьком");
                 AlgorithmComboBox.Items.Add("Быстрая сортировка");
                 AlgorithmComboBox.Items.Add("Гибридная сортировка");
-                AlgorithmComboBox.Items.Add("Блинная Сортировка");
+                AlgorithmComboBox.Items.Add("Блинная cортировка");
+                AlgorithmComboBox.Items.Add("Сортировка бинарным деревом");
             }
             else if (selectedCategory == "Math")
             {

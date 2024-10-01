@@ -33,10 +33,16 @@ public class SortingTester
             var sortResults = tester.TestSortingOperation(timSort, maxData, stepSize, repetitions);
             StoreResults(sortResults);
         }
-        else if (algorithm == "Блинная Сортировка")
+        else if (algorithm == "Блинная сортировка")
         {
-            PancakeSortPersonal timSort = new PancakeSortPersonal();
-            var sortResults = tester.TestSortingOperation(timSort, maxData, stepSize, repetitions);
+            PancakeSortPersonal pancakeSort = new PancakeSortPersonal();
+            var sortResults = tester.TestSortingOperation(pancakeSort, maxData, stepSize, repetitions);
+            StoreResults(sortResults);
+        }
+        else if (algorithm == "Сортировка бинарным деревом")
+        {
+            TreeSortPersonal treesort = new TreeSortPersonal();
+            var sortResults = tester.TestSortingOperation(treesort, maxData, stepSize, repetitions);
             StoreResults(sortResults);
         }
     }
