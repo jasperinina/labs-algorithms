@@ -24,7 +24,7 @@ public class AutoTesterOther
     {
         var results = new List<(int size, double averageTime)>();
 
-        for (int size = stepSize; size <= maxSize; size += stepSize)
+        for (int size = 1; size <= maxSize; size += stepSize)
         {
             int[] data = dataGenerator.ArrayGenerate(size, 100);
 
@@ -45,7 +45,7 @@ public class AutoTesterOther
     {
         var results = new List<(int size, double averageTime)>();
 
-        for (int size = stepSize; size <= maxSize; size += stepSize)
+        for (int size = 1; size <= maxSize; size += stepSize)
         {
             double[] coefficients = dataGenerator.GeneratePolynomialCoefficients(size, 100.0);
 
@@ -66,7 +66,7 @@ public class AutoTesterOther
     {
         var results = new List<(int size, double averageTime)>();
 
-        for (int size = stepSize; size <= maxSize; size += stepSize)
+        for (int size = 1; size <= maxSize; size += stepSize)
         {
             int[] data = dataGenerator.ArrayGenerate(size, 100);
 
@@ -87,7 +87,7 @@ public class AutoTesterOther
     {
         var results = new List<(int size, double averageTime)>();
 
-        for (int size = stepSize; size <= maxSize; size += stepSize)
+        for (int size = 1; size <= maxSize; size += stepSize)
         {
             int[,] matrix1 = dataGenerator.MatrixGenerate(size, 100); 
             int[,] matrix2 = dataGenerator.MatrixGenerate(size, 100); 

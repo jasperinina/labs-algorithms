@@ -10,7 +10,7 @@ public class AutoTesterPower
     {
         var results = new List<(int Exponent, int Steps)>();
 
-        for (int exponent = stepSize; exponent <= maxExponent; exponent += stepSize)
+        for (int exponent = 1; exponent <= maxExponent; exponent += stepSize)
         {
             var (_, stepCount) = powerOperation(baseValue, exponent);
             results.Add((exponent, stepCount));

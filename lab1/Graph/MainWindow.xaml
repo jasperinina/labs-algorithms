@@ -11,38 +11,40 @@
         <FontFamily x:Key="EuclidSquareSemiBoldBold">/Graph;component/Font/EuclidSquare-SemiBold.ttf#Euclid Square</FontFamily>
         <!-- Стиль для RadioButton -->
         <Style TargetType="RadioButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="RadioButton">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <!-- Контейнер для радиокнопки -->
-                            <Grid Width="30" Height="30">
-                                <!-- Внешний круг радиокнопки -->
-                                <Ellipse x:Name="outerCircle" Width="24" Height="24" Stroke="Gray" StrokeThickness="1" Fill="#F5F5F5"/>
-                                <!-- Черный кружок для выбранной радиокнопки -->
-                                <Ellipse x:Name="innerCircle" Width="16" Height="16" Fill="#2A2D32" Visibility="Collapsed"/>
-                            </Grid>
-                            <!-- Текст для радиокнопки -->
-                            <TextBlock Text="{TemplateBinding Content}" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
-                        </StackPanel>
-                        <!-- Триггеры для изменения состояния радиокнопки -->
-                        <ControlTemplate.Triggers>
-                            <!-- Триггер для состояния IsChecked = True -->
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="innerCircle" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="outerCircle" Property="Stroke" Value="Gray"/>
-                            </Trigger>
-                            <!-- Триггер для состояния IsChecked = False -->
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter TargetName="innerCircle" Property="Visibility" Value="Collapsed"/>
-                                <Setter TargetName="outerCircle" Property="Stroke" Value="Gray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <!-- Стиль для ComboBox -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <!-- Контейнер для радиокнопки -->
+                        <Grid Width="30" Height="30">
+                            <!-- Внешний круг радиокнопки -->
+                            <Ellipse x:Name="outerCircle" Width="24" Height="24" Stroke="Gray" StrokeThickness="1" Fill="#F5F5F5"/>
+
+                            <!-- Черный кружок для выбранной радиокнопки -->
+                            <Ellipse x:Name="innerCircle" Width="16" Height="16" Fill="#1F77B4" Visibility="Collapsed"/>
+                        </Grid>
+
+                        <!-- Текст для радиокнопки -->
+                        <TextBlock Text="{TemplateBinding Content}" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Триггеры для изменения состояния радиокнопки -->
+                    <ControlTemplate.Triggers>
+                        <!-- Триггер для состояния IsChecked = True -->
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="innerCircle" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="outerCircle" Property="Stroke" Value="Gray"/>
+                        </Trigger>
+                        <!-- Триггер для состояния IsChecked = False -->
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="innerCircle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="outerCircle" Property="Stroke" Value="Gray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
         <Style TargetType="ComboBox">
             <!-- Установка размера шрифта для ComboBox -->
             <Setter Property="FontSize" Value="16"/>
@@ -56,7 +58,15 @@
                                     Background="White" 
                                     CornerRadius="10" 
                                     SnapsToDevicePixels="True">
-                                <DockPanel>
+                                <Grid>
+                                    <!-- Определение колонок -->
+                                    <Grid.ColumnDefinitions>
+                                        <!-- Первая колонка для текста занимает всё доступное пространство -->
+                                        <ColumnDefinition Width="*" />
+                                        <!-- Вторая колонка фиксированной ширины для стрелки -->
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+
                                     <!-- Контент ComboBox -->
                                     <ContentPresenter x:Name="contentPresenter" 
                                                       Focusable="False" 
@@ -67,19 +77,22 @@
                                                       Content="{TemplateBinding SelectionBoxItem}" 
                                                       ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                                       ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
-                                                      RecognizesAccessKey="True"/>
+                                                      RecognizesAccessKey="True"
+                                                      Grid.Column="0"/>
+
                                     <!-- Обертывание ToggleButton в Border для увеличения области нажатия -->
-                                    <Border Width="50" Height="30" 
-                                            Margin="0,10,-200,0" 
+                                    <Border Grid.Column="1" 
+                                            Width="40" 
+                                            Height="30" 
+                                            Margin="0,10,16,0" 
                                             Background="Transparent" 
-                                            CornerRadius="10" 
                                             VerticalAlignment="Center">
-                                        <ToggleButton DockPanel.Dock="Right" 
-                                                      Focusable="False" 
+                                        <ToggleButton Focusable="False" 
                                                       IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                                       ClickMode="Press" 
                                                       Background="Transparent" 
                                                       BorderBrush="Transparent">
+                                            <!-- Стрелка -->
                                             <Path x:Name="Arrow" 
                                                   Data="M 0 0 L 4 4 L 8 0 Z" 
                                                   Width="12" 
@@ -89,7 +102,7 @@
                                                   VerticalAlignment="Center"/>
                                         </ToggleButton>
                                     </Border>
-                                </DockPanel>
+                                </Grid>
                             </Border>
                             <!-- Popup для отображения списка элементов -->
                             <Popup IsOpen="{TemplateBinding IsDropDownOpen}" 
@@ -133,16 +146,17 @@
             <TextBlock Text="Выберите тип алгоритма" Width="240" Height="24" FontWeight="SemiBold" FontSize="20" 
                        Margin="-130,20,0,16" FontFamily="{StaticResource EuclidSquareSemiBoldBold}"/>
 
+
             <!-- Радио-кнопки для выбора категорий -->
-            <RadioButton Content="Сортировка" GroupName="AlgorithmType" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
+            <RadioButton Content="Сортировка" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
                          Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="SortingRadioButton_Checked"/>
-            <RadioButton Content="Мат. операции" GroupName="AlgorithmType" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
+            <RadioButton Content="Мат. операции" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
                          Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="MathRadioButton_Checked"/>
-            <RadioButton Content="Матричные операции" GroupName="AlgorithmType" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
+            <RadioButton Content="Матричные операции" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
                          Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="MatrixRadioButton_Checked"/>
-            <RadioButton Content="Возведение в степень" GroupName="AlgorithmType" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
+            <RadioButton Content="Возведение в степень" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
                          Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="PowerRadioButton_Checked"/>
-            <RadioButton Content="Полиномы" GroupName="AlgorithmType" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
+            <RadioButton Content="Полиномы" GroupName="AlgorithmType" Width="229" IsChecked="True" Height="30" FontWeight="Regular" FontSize="16" 
                          Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="PolynomialRadioButton_Checked"/>
 
             <!-- Выпадающий список для выбора алгоритма -->
@@ -157,20 +171,21 @@
             </ComboBox>
 
             <!-- Поля ввода данных -->
+            
             <TextBlock Text="Введите параметры тестирования" Width="350" Height="24" FontWeight="SemiBold" FontSize="20" Margin="-20,30,0,10" FontFamily="{StaticResource EuclidSquareSemiBold}"/>
 
             <StackPanel Name="InputFieldsPanel" Margin="20,10,0,0">
-                <!-- MaxDataTextBlock and MaxDataTextBox -->
-                <TextBlock Name="MaxDataTextBlock" 
+                <TextBlock Name="FirstTextBlock" 
                            Text="Максимальное количество данных" 
                            FontFamily="{StaticResource EuclidSquareRegular}" 
                            FontSize="14" 
                            FontWeight="Regular" 
-                           Margin="0,0,0,5"/>
+                           Margin="0,0,0,5"/> <!-- Добавлен нижний отступ -->
+
                 <Border CornerRadius="10" 
                         Background="White" 
                         Width="360"
-                        Margin="-20,5,0,10">
+                        Margin="-20,5,0,10"> 
                     <TextBox Name="MaxDataTextBox" 
                              Width="360" 
                              Height="40" 
@@ -184,114 +199,45 @@
                              AllowDrop="True"/>
                 </Border>
 
-                <!-- RepetitionsTextBlock and RepetitionsTextBox -->
-                <TextBlock Name="RepetitionsTextBlock" 
+
+                <!-- Текстовое поле для количества экспериментов -->
+                <TextBlock Name="SecondTextBlock" 
                            Text="Количество экспериментов" 
                            FontFamily="{StaticResource EuclidSquareRegular}" 
                            FontSize="14" 
                            FontWeight="Regular" 
                            Margin="0,0,0,5"/>
+                
                 <Border CornerRadius="10" 
                         Background="White" 
                         Width="360"
                         Margin="-20,5,0,10">
-                    <TextBox Name="RepetitionsTextBox" 
-                             Width="360" 
-                             Height="40" 
-                             Margin="0" 
-                             FontFamily="{StaticResource EuclidSquareRegular}" 
-                             FontSize="16" 
-                             Padding="10" 
-                             BorderBrush="Transparent" 
-                             Background="Transparent" 
-                             IsReadOnly="False" 
-                             AllowDrop="True"/>
+                <TextBox Name="RepetitionsTextBox" 
+                         Width="360" 
+                         Height="40" 
+                         Margin="0" 
+                         FontFamily="{StaticResource EuclidSquareRegular}" 
+                         FontSize="16" 
+                         Padding="10" 
+                         BorderBrush="Transparent" 
+                         Background="Transparent" 
+                         IsReadOnly="False" 
+                         AllowDrop="True"/>
                 </Border>
 
-                <!-- StepSizeTextBlock and StepSizeTextBox -->
-                <TextBlock Name="StepSizeTextBlock" 
+                <!-- Текстовое поле для шага увеличения данных -->
+                <TextBlock Name="ThirdextBlock" 
                            Text="Шаг увеличения данных" 
                            FontFamily="{StaticResource EuclidSquareRegular}" 
                            FontSize="14" 
                            FontWeight="Regular" 
                            Margin="0,0,0,5"/>
+                
                 <Border CornerRadius="10" 
-                        Background="White" 
-                        Width="360"
-                        Margin="-20,5,0,10">
-                    <TextBox Name="StepSizeTextBox" 
-                             Width="360" 
-                             Height="40" 
-                             Margin="0" 
-                             FontFamily="{StaticResource EuclidSquareRegular}" 
-                             FontSize="16" 
-                             Padding="10" 
-                             BorderBrush="Transparent" 
-                             Background="Transparent" 
-                             IsReadOnly="False" 
-                             AllowDrop="True"/>
-                </Border>
-
-                <!-- BaseTextBlock and BaseTextBox -->
-                <TextBlock Name="BaseTextBlock" 
-                           Text="Основание степени" 
-                           FontFamily="{StaticResource EuclidSquareRegular}" 
-                           FontSize="14" 
-                           FontWeight="Regular" 
-                           Margin="0,0,0,5"/>
-                <Border CornerRadius="10" 
-                        Background="White" 
-                        Width="360"
-                        Margin="-20,5,0,10">
-                    <TextBox Name="BaseTextBox" 
-                             Width="360" 
-                             Height="40" 
-                             Margin="0" 
-                             FontFamily="{StaticResource EuclidSquareRegular}" 
-                             FontSize="16" 
-                             Padding="10" 
-                             BorderBrush="Transparent" 
-                             Background="Transparent" 
-                             IsReadOnly="False" 
-                             AllowDrop="True"/>
-                </Border>
-
-                <!-- MaxExponentTextBlock and MaxExponentTextBox -->
-                <TextBlock Name="MaxExponentTextBlock" 
-                           Text="Максимальный показатель степени" 
-                           FontFamily="{StaticResource EuclidSquareRegular}" 
-                           FontSize="14" 
-                           FontWeight="Regular" 
-                           Margin="0,0,0,5"/>
-                <Border CornerRadius="10" 
-                        Background="White" 
-                        Width="360"
-                        Margin="-20,5,0,10">
-                    <TextBox Name="MaxExponentTextBox" 
-                             Width="360" 
-                             Height="40" 
-                             Margin="0" 
-                             FontFamily="{StaticResource EuclidSquareRegular}" 
-                             FontSize="16" 
-                             Padding="10" 
-                             BorderBrush="Transparent" 
-                             Background="Transparent" 
-                             IsReadOnly="False" 
-                             AllowDrop="True"/>
-                </Border>
-
-                <!-- ExponentStepTextBlock and ExponentStepTextBox -->
-                <TextBlock Name="ExponentStepTextBlock" 
-                           Text="Шаг увеличения степени" 
-                           FontFamily="{StaticResource EuclidSquareRegular}" 
-                           FontSize="14" 
-                           FontWeight="Regular" 
-                           Margin="0,0,0,5"/>
-                <Border CornerRadius="10" 
-                        Background="White" 
-                        Width="360"
-                        Margin="-20,5,0,10">
-                    <TextBox Name="ExponentStepTextBox" 
+                         Background="White" 
+                         Width="360"
+                         Margin="-20,5,0,10">
+                <TextBox Name="StepSizeTextBox" 
                              Width="360" 
                              Height="40" 
                              Margin="0" 
@@ -306,12 +252,12 @@
 
                 <!-- Кнопка для запуска тестирования -->
                 <Border CornerRadius="10" 
-                        Background="#F85D3A"
+                        Background="#1F77B4"
                         Width="360" 
                         Height="40" 
                         Margin="-20,70,0,0">
                     <Button Name="StartTestButton" 
-                            Background="#F85D3A"
+                            Background="#1F77B4"
                             Content="Начать тестирование" 
                             Width="330" 
                             Height="40" 

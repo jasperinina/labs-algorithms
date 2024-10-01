@@ -27,12 +27,27 @@ namespace Graph
 
             // Инициализация GraphBuilder с передачей WpfPlot
             graphBuilder = new GraphBuilder(wpfPlot);
+            
+            // Подписываемся на событие Loaded для инициализации после загрузки окна
+            this.Loaded += MainWindow_Loaded;
+        }
+        
+        // Этот метод будет вызван после полной загрузки окна
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            selectedCategory = "Sorting";
+            PopulateAlgorithmComboBox();
         }
 
         // Метод для заполнения выпадающего списка алгоритмов в зависимости от выбранной категории
         private void PopulateAlgorithmComboBox()
         {
-            // Очищаем выпадающий список алгоритмов перед добавлением новых элементов
+            // Проверка, что ComboBox инициализирован
+            if (AlgorithmComboBox == null)
+            {
+                throw new NullReferenceException("AlgorithmComboBox не инициализирован.");
+            }
+            
             AlgorithmComboBox.Items.Clear();
 
             // В зависимости от выбранной категории (selectedCategory) добавляем алгоритмы
@@ -69,83 +84,78 @@ namespace Graph
             AlgorithmComboBox.SelectedIndex = 0;
         }
 
-        // Обработчики кнопок выбора категорий
+        // Обработчики для RadioButton выбора категорий
         private void SortingRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Sorting";
-            PopulateAlgorithmComboBox();
+            if (AlgorithmComboBox != null)
+            {
+                PopulateAlgorithmComboBox();
+            }
         }
 
         private void MathRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Math";
-            PopulateAlgorithmComboBox();
+            if (AlgorithmComboBox != null)
+            {
+                PopulateAlgorithmComboBox();
+            }
         }
+
 
         private void MatrixRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Matrix";
-            PopulateAlgorithmComboBox();
+            if (AlgorithmComboBox != null)
+            {
+                PopulateAlgorithmComboBox();
+            }
         }
 
         private void PowerRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Power";
-            PopulateAlgorithmComboBox();
+            if (AlgorithmComboBox != null)
+            {
+                PopulateAlgorithmComboBox();
+            }
         }
 
         private void PolynomialRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Polynomial";
-            PopulateAlgorithmComboBox();
+            if (AlgorithmComboBox != null)
+            {
+                PopulateAlgorithmComboBox();
+            }
         }
-        
+
         // Показ полей ввода данных, когда выбран конкретный алгоритм
-        private void AlgorithmComboBox_SelectionChanged(object sender,
-            System.Windows.Controls.SelectionChangedEventArgs e)
+        private void AlgorithmComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (AlgorithmComboBox.SelectedIndex >= 0)
             {
                 selectedAlgorithm = AlgorithmComboBox.SelectedItem.ToString();
-                InputFieldsPanel.Visibility = Visibility.Visible;
+                
+                // Очистка полей ввода данных
+                MaxDataTextBox.Clear();
+                RepetitionsTextBox.Clear();
+                StepSizeTextBox.Clear();
 
-                // Показ полей для степеней, если выбрана категория степенных алгоритмов
+                // Изменяем текстовые метки для степенных операций
                 if (selectedCategory == "Power")
                 {
-                    BaseTextBox.Visibility = Visibility.Visible;
-                    MaxExponentTextBox.Visibility = Visibility.Visible;
-                    ExponentStepTextBox.Visibility = Visibility.Visible;
-
-                    MaxDataTextBox.Visibility = Visibility.Collapsed;
-                    RepetitionsTextBox.Visibility = Visibility.Collapsed;
-                    StepSizeTextBox.Visibility = Visibility.Collapsed;
-
-                    MaxDataTextBlock.Visibility = Visibility.Collapsed;
-                    RepetitionsTextBlock.Visibility = Visibility.Collapsed;
-                    StepSizeTextBlock.Visibility = Visibility.Collapsed;
-
-                    BaseTextBlock.Visibility = Visibility.Visible;
-                    MaxExponentTextBlock.Visibility = Visibility.Visible;
-                    ExponentStepTextBlock.Visibility = Visibility.Visible;
+                    FirstTextBlock.Text = "Максимальная степень";
+                    SecondTextBlock.Text = "Основание степени";
+                    ThirdextBlock.Text = "Шаг увеличения степени";
                 }
                 else
                 {
-                    // Для всех остальных категорий (сортировка, математика, матрицы) показываем обычные поля
-                    MaxDataTextBox.Visibility = Visibility.Visible;
-                    RepetitionsTextBox.Visibility = Visibility.Visible;
-                    StepSizeTextBox.Visibility = Visibility.Visible;
-
-                    BaseTextBox.Visibility = Visibility.Collapsed;
-                    MaxExponentTextBox.Visibility = Visibility.Collapsed;
-                    ExponentStepTextBox.Visibility = Visibility.Collapsed;
-
-                    MaxDataTextBlock.Visibility = Visibility.Visible;
-                    RepetitionsTextBlock.Visibility = Visibility.Visible;
-                    StepSizeTextBlock.Visibility = Visibility.Visible;
-
-                    BaseTextBlock.Visibility = Visibility.Collapsed;
-                    MaxExponentTextBlock.Visibility = Visibility.Collapsed;
-                    ExponentStepTextBlock.Visibility = Visibility.Collapsed;
+                    // Возвращаем текстовые метки к исходным значениям для других категорий
+                    FirstTextBlock.Text = "Максимальное количество данных";
+                    SecondTextBlock.Text = "Количество повторов";
+                    ThirdextBlock.Text = "Шаг увеличения данных";
                 }
             }
         }
@@ -153,57 +163,106 @@ namespace Graph
         // Обновляем метод обработки результатов
         private void StartTestButton_Click(object sender, RoutedEventArgs e)
         {
-            // Очищаем область графиков
-            wpfPlot.Plot.Clear();
-
-            switch (selectedCategory)
+            try
             {
-                case "Sorting":
-                    sortingTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
-                    dataSizes = sortingTester.GetDataSizes();
-                    times = sortingTester.GetTimes();
-                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
-                    break;
+                // Очищаем область графиков
+                wpfPlot.Plot.Clear();
 
-                case "Math":
-                    mathTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
-                    dataSizes = mathTester.GetDataSizes();
-                    times = mathTester.GetTimes();
-                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
-                    break;
+                switch (selectedCategory)
+                {
+                    case "Sorting":
+                        sortingTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                        dataSizes = sortingTester.GetDataSizes();
+                        times = sortingTester.GetTimes();
+                        graphBuilder.PlotTimeVsDataSize(dataSizes, times);
+                        break;
 
-                case "Power":
-                    powerTester.Test(selectedAlgorithm, GetBaseValue(), GetMaxExponent(), GetExponentStep());
-                    exponents = powerTester.GetExponents();
-                    steps = powerTester.GetSteps();
-                    graphBuilder.PlotStepsVsExponent(exponents, steps); // Построение графика шагов vs. степени
-                    break;
+                    case "Math":
+                        mathTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                        dataSizes = mathTester.GetDataSizes();
+                        times = mathTester.GetTimes();
+                        graphBuilder.PlotTimeVsDataSize(dataSizes, times);
+                        break;
 
-                case "Polynomial":
-                    polynomialTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
-                    dataSizes = polynomialTester.GetDataSizes();
-                    times = polynomialTester.GetTimes();
-                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
-                    break;
+                    case "Power":
+                        powerTester.Test(selectedAlgorithm, GetBaseValue(), GetMaxExponent(), GetExponentStep());
+                        exponents = powerTester.GetExponents();
+                        steps = powerTester.GetSteps();
+                        graphBuilder.PlotStepsVsExponent(exponents, steps);
+                        break;
 
-                case "Matrix":
-                    matrixTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
-                    dataSizes = matrixTester.GetDataSizes();
-                    times = matrixTester.GetTimes();
-                    graphBuilder.PlotTimeVsDataSize(dataSizes, times); // Построение графика времени vs. размера данных
-                    break;
+                    case "Polynomial":
+                        polynomialTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                        dataSizes = polynomialTester.GetDataSizes();
+                        times = polynomialTester.GetTimes();
+                        graphBuilder.PlotTimeVsDataSize(dataSizes, times);
+                        break;
+
+
+                    case "Matrix":
+                        matrixTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
+                        dataSizes = matrixTester.GetDataSizes();
+                        times = matrixTester.GetTimes();
+                        graphBuilder.PlotTimeVsDataSize(dataSizes, times);
+                        break;
+                }
             }
-
-
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        // Методы для получения данных из текстовых полей
-            private int GetMaxData() => int.Parse(MaxDataTextBox.Text);
-            private int GetStepSize() => int.Parse(StepSizeTextBox.Text);
-            private int GetRepetitions() => int.Parse(RepetitionsTextBox.Text);
 
-            private int GetBaseValue() => int.Parse(BaseTextBox.Text);
-            private int GetMaxExponent() => int.Parse(MaxExponentTextBox.Text);
-            private int GetExponentStep() => int.Parse(ExponentStepTextBox.Text);
+        // Методы для получения данных из текстовых полей
+        private int GetMaxData()
+        {
+            if (int.TryParse(MaxDataTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для максимального количества данных");
+        }
+
+        private int GetStepSize()
+        {
+            if (int.TryParse(StepSizeTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для шага увеличения данных");
+        }
+
+        private int GetRepetitions()
+        {
+            if (int.TryParse(RepetitionsTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для количества повторов");
+        }
+
+        // Методы для степенных операций
+        private int GetBaseValue()
+        {
+            if (int.TryParse(RepetitionsTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для основания степени");
+        }
+
+        private int GetMaxExponent()
+        {
+            if (int.TryParse(MaxDataTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для максимальной степени");
+        }
+
+        private int GetExponentStep()
+        {
+            if (int.TryParse(StepSizeTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для шага увеличения степени");
+        }
+
     }
 }
