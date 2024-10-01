@@ -54,13 +54,13 @@ namespace Graph
                 AlgorithmComboBox.Items.Add("Сортировка пузырьком");
                 AlgorithmComboBox.Items.Add("Быстрая сортировка");
                 AlgorithmComboBox.Items.Add("Гибридная сортировка");
-                AlgorithmComboBox.Items.Add("Блинная cортировка");
+                AlgorithmComboBox.Items.Add("Блинная сортировка");
                 AlgorithmComboBox.Items.Add("Сортировка бинарным деревом");
             }
             else if (selectedCategory == "Math")
             {
                 AlgorithmComboBox.Items.Add("Постоянная функция");
-                AlgorithmComboBox.Items.Add("Сумма Элементов");
+                AlgorithmComboBox.Items.Add("Сумма элементов");
                 AlgorithmComboBox.Items.Add("Умножение элементов");
             }
             else if (selectedCategory == "Matrix")
@@ -78,13 +78,12 @@ namespace Graph
             else if (selectedCategory == "Polynomial")
             {
                 AlgorithmComboBox.Items.Add("Прямое вычисление");
-                AlgorithmComboBox.Items.Add("Схема горнера");
+                AlgorithmComboBox.Items.Add("Схема Горнера");
             }
             else if (selectedCategory == "StringSearch")
             {
                 AlgorithmComboBox.Items.Add("Алгоритм Бойера-Мура-Хорспула");
             }
-
 
             // Устанавливаем первый элемент как выбранный
             AlgorithmComboBox.SelectedIndex = 0;

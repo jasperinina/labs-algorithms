@@ -21,7 +21,7 @@ public class MathTester
             var mathResults = tester.TestBasicOperation(constFunction, maxData, stepSize, repetitions);
             StoreResults(mathResults);
         }
-        else if (algorithm == "Сумма Элементов")
+        else if (algorithm == "Сумма элементов")
         {
             SumNumbers sumNumbers = new SumNumbers();
             var mathResults = tester.TestBasicOperation(sumNumbers, maxData, stepSize, repetitions);

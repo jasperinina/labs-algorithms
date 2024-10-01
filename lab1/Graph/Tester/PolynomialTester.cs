@@ -15,7 +15,7 @@ public class PolynomialTester
         dataSizes.Clear();
         times.Clear();
 
-        if (algorithm == "Схема горнера")
+        if (algorithm == "Схема Горнера")
         {
             HornerPolynomial hornerPolynomial = new HornerPolynomial();
             var polyResults = tester.TestPolynomialOperation(hornerPolynomial, maxData, stepSize, repetitions);
