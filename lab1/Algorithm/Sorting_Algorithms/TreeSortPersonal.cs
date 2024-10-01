@@ -1,64 +1,66 @@
 ﻿namespace Algorithm.Sorting_Algorithms;
 
-public class TreeNode : SortingAlgorithm
+public class TreeSortPersonal : SortingAlgorithm
 {
-    public TreeNode(int data)
+    public class TreeNode
     {
-        Data = data;
-    }
-
-    public int Data { get; set; }
-    public TreeNode Left { get; set; }
-    public TreeNode Right { get; set; }
-
-    //рекурсивное добавление узла в дерево
-    public void Insert(TreeNode node)
-    {
-        if (node.Data < Data)
+        public TreeNode(int data)
         {
-            if (Left == null)
+            Data = data;
+        }
+        public int Data { get; set; }
+        public TreeNode Left { get; set; }
+        public TreeNode Right { get; set; }
+
+        //рекурсивное добавление узла в дерево
+        public void Insert(TreeNode node)
+        {
+            if (node.Data < Data)
             {
-                Left = node;
+                if (Left == null)
+                {
+                    Left = node;
+                }
+                else
+                {
+                    Left.Insert(node);
+                }
             }
             else
             {
-                Left.Insert(node);
+                if (Right == null)
+                {
+                    Right = node;
+                }
+                else
+                {
+                    Right.Insert(node);
+                }
             }
         }
-        else
+
+        //преобразование дерева в отсортированный массив
+        public int[] Transform(List<int> elements = null)
         {
-            if (Right == null)
+            if (elements == null)
             {
-                Right = node;
+                elements = new List<int>();
             }
-            else
+
+            if (Left != null)
             {
-                Right.Insert(node);
+                Left.Transform(elements);
             }
+
+            elements.Add(Data);
+
+            if (Right != null)
+            {
+                Right.Transform(elements);
+            }
+
+            return elements.ToArray();
         }
-    }
-
-    //преобразование дерева в отсортированный массив
-    public int[] Transform(List<int> elements = null)
-    {
-        if (elements == null)
-        {
-            elements = new List<int>();
-        }
-
-        if (Left != null)
-        {
-            Left.Transform(elements);
-        }
-
-        elements.Add(Data);
-
-        if (Right != null)
-        {
-            Right.Transform(elements);
-        }
-
-        return elements.ToArray();
     }
     public override void Sort(int[] array)
     {

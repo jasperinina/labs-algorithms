@@ -41,8 +41,8 @@ public class SortingTester
         }
         else if (algorithm == "Сортировка бинарным деревом")
         {
-            TreeSortPersonal treesort = new TreeSortPersonal();
-            var sortResults = tester.TestSortingOperation(treesort, maxData, stepSize, repetitions);
+            TreeSortPersonal treeSort = new TreeSortPersonal();
+            var sortResults = tester.TestSortingOperation(treeSort, maxData, stepSize, repetitions);
             StoreResults(sortResults);
         }
     }
