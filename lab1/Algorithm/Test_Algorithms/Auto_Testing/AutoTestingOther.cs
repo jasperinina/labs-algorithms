@@ -103,4 +103,10 @@ public class AutoTesterOther
 
         return results;
     }
+
+    // Метод для тестирования алгоритма Бойера-Мура-Хорспула
+    public void TestAlgorithmBoyerMooreHorspoolPersonal()
+    {
+
+    }
 }

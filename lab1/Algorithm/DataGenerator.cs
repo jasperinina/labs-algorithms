@@ -47,4 +47,16 @@ public class DataGenerator
         }
         return coefficients;
     }
+
+    // Метод для генерации случайных строк длины lenght
+    public string GenerateString(int length)
+    {
+        string alf = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ0123456789!@#$%^&*()"; // Алфавит для создания рандомной строки
+        char[] stringChars = new char[length];
+        for (int i = 0; i < length; i++)
+        {
+            stringChars[i] = alf[rnd.Next(alf.Length)];
+        }
+        return new string(stringChars);
+    }
 }
