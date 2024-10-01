@@ -22,6 +22,7 @@ public class DataGenerator
         int[,] matrix = new int[matrixDim, matrixDim];
         
         MatrixFill(matrix, maxRandomValue);
+        
         return matrix;
     }
 
@@ -34,6 +35,7 @@ public class DataGenerator
         {
             array[i] = rnd.Next(maxRandomValue);
         }
+        
         return array;
     }
     
@@ -41,10 +43,12 @@ public class DataGenerator
     public double[] GeneratePolynomialCoefficients(int size, double maxRandomValue)
     {
         double[] coefficients = new double[size];
+        
         for (int i = 0; i < size; i++)
         {
             coefficients[i] = rnd.NextDouble() * maxRandomValue; // Коэффициенты от 0 до maxRandomValue
         }
+        
         return coefficients;
     }
 
@@ -53,10 +57,12 @@ public class DataGenerator
     {
         string alf = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ0123456789!@#$%^&*()"; // Алфавит для создания рандомной строки
         char[] stringChars = new char[length];
+        
         for (int i = 0; i < length; i++)
         {
             stringChars[i] = alf[rnd.Next(alf.Length)];
         }
+        
         return new string(stringChars);
     }
 }

@@ -25,8 +25,10 @@ public class GraphBuilder
         wpfPlot.Plot.Axes.Left.Min = 0;
         wpfPlot.Plot.Axes.Left.Max = 1;
         
-        wpfPlot.Plot.Axes.Bottom.Min = 0;
-        wpfPlot.Plot.Axes.Bottom.Max = 1000;
+        // Настройка максимальных значений осей (динамически)
+        wpfPlot.Plot.Axes.Left.Max = timeResults.Max() * 100;
+        wpfPlot.Plot.Axes.Bottom.Max = sizes.Max();
+
         
         wpfPlot.Refresh();
     }
@@ -44,9 +46,34 @@ public class GraphBuilder
         wpfPlot.Plot.Axes.Left.Min = 0;
         wpfPlot.Plot.Axes.Left.Max = 100;
         
-        wpfPlot.Plot.Axes.Bottom.Min = 0;
-        wpfPlot.Plot.Axes.Bottom.Max = 50000;
+        // Настройка максимальных значений осей (динамически)
+        wpfPlot.Plot.Axes.Left.Max = stepResults.Max();
+        wpfPlot.Plot.Axes.Bottom.Max = exponents.Max();
+
         
+        wpfPlot.Refresh();
+    }
+    
+    public void PlotStringLengthVsSteps(double[] stringLengths, double[] stepResults)
+    {
+        wpfPlot.Plot.Clear();
+
+        // Добавляем график (размер строки vs шаги)
+        wpfPlot.Plot.Add.Scatter(stringLengths, stepResults);
+
+        // Устанавливаем метки осей
+        wpfPlot.Plot.XLabel("Длина строки");
+        wpfPlot.Plot.YLabel("Количество шагов");
+
+        // Настройка осей
+        wpfPlot.Plot.Axes.Left.Min = 0; // Минимальное значение по оси Y
+        wpfPlot.Plot.Axes.Bottom.Min = 0; // Минимальное значение по оси X
+    
+        // Настройка максимальных значений осей (динамически)
+        wpfPlot.Plot.Axes.Left.Max = stepResults.Max();
+        wpfPlot.Plot.Axes.Bottom.Max = stringLengths.Max();
+
+        // Обновляем график
         wpfPlot.Refresh();
     }
 }

@@ -14,6 +14,7 @@ namespace Graph
         private MatrixTester matrixTester = new MatrixTester();
         private PowerTester powerTester = new PowerTester();
         private PolynomialTester polynomialTester = new PolynomialTester();
+        private StringTester stringTester = new StringTester();
         
         private double[] dataSizes;
         private double[] times;
@@ -79,6 +80,11 @@ namespace Graph
                 AlgorithmComboBox.Items.Add("Прямое вычисление");
                 AlgorithmComboBox.Items.Add("Схема горнера");
             }
+            else if (selectedCategory == "StringSearch")
+            {
+                AlgorithmComboBox.Items.Add("Алгоритм Бойера-Мура-Хорспула");
+            }
+
 
             // Устанавливаем первый элемент как выбранный
             AlgorithmComboBox.SelectedIndex = 0;
@@ -102,8 +108,7 @@ namespace Graph
                 PopulateAlgorithmComboBox();
             }
         }
-
-
+        
         private void MatrixRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Matrix";
@@ -130,7 +135,16 @@ namespace Graph
                 PopulateAlgorithmComboBox();
             }
         }
-
+        
+        private void StringSearchRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            selectedCategory = "StringSearch";
+            if (AlgorithmComboBox != null)
+            {
+                PopulateAlgorithmComboBox();
+            }
+        }
+        
         // Показ полей ввода данных, когда выбран конкретный алгоритм
         private void AlgorithmComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -149,6 +163,13 @@ namespace Graph
                     SecondTextBlock.Text = "Основание степени";
                     ThirdextBlock.Text = "Шаг увеличения степени";
                 }
+                else if (selectedCategory == "StringSearch")
+                {
+                    FirstTextBlock.Text = "Максимальная длинна строки";
+                    SecondTextBlock.Text = "Длина подстроки";
+                    ThirdextBlock.Text = "Шаг увеличения строки";
+                }
+
                 else
                 {
                     FirstTextBlock.Text = "Максимальное количество данных";
@@ -195,14 +216,21 @@ namespace Graph
                         times = polynomialTester.GetTimes();
                         graphBuilder.PlotTimeVsDataSize(dataSizes, times);
                         break;
-
-
+                    
                     case "Matrix":
                         matrixTester.Test(selectedAlgorithm, GetMaxData(), GetStepSize(), GetRepetitions());
                         dataSizes = matrixTester.GetDataSizes();
                         times = matrixTester.GetTimes();
                         graphBuilder.PlotTimeVsDataSize(dataSizes, times);
                         break;
+                    
+                    case "StringSearch":
+                        stringTester.Test(selectedAlgorithm, GetStringLength(), GetSubstringLength(), GetLengthStep());
+                        dataSizes = stringTester.GetStringLengths();
+                        steps = stringTester.GetSteps();
+                        graphBuilder.PlotStringLengthVsSteps(dataSizes, steps);
+                        break;
+                    
                 }
             }
             catch (ArgumentException ex)
@@ -210,8 +238,7 @@ namespace Graph
                 MessageBox.Show(ex.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
+        
         // Методы для получения данных из текстовых полей
         private int GetMaxData()
         {
@@ -261,6 +288,30 @@ namespace Graph
             else
                 throw new ArgumentException("Некорректный ввод для шага увеличения степени");
         }
+        
+        // Методы для степенных операций
+        private int GetSubstringLength()
+        {
+            if (int.TryParse(RepetitionsTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для длинны подстроки");
+        }
 
+        private int GetStringLength()
+        {
+            if (int.TryParse(MaxDataTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для максимальной длинны строки");
+        }
+
+        private int GetLengthStep()
+        {
+            if (int.TryParse(StepSizeTextBox.Text, out int result))
+                return result;
+            else
+                throw new ArgumentException("Некорректный ввод для шага увеличения строки");
+        }
     }
 }

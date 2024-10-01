@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Algorithm
+﻿namespace Algorithm
 {
     // Алгоритм Бойера-Мура-Хорспула
-    class AlgorithmBMHPersonal
+    public class AlgorithmBMHPersonal
     {
         public List<int> Indexes = new List<int>();
         private Dictionary<char, int> _tableOffset = new Dictionary<char, int>();
         public AlgorithmBMHPersonal(string text, string pattern)
         {
             _tableOffset = GetTableOffset(pattern);
-            Indexes = GetIndexes(text, pattern);
+            (Indexes, _) = GetIndexes(text, pattern);
         }
 
         // Метод для создания таблицы смещений
@@ -37,25 +31,34 @@ namespace Algorithm
                 table[pattern[pattern.Length - 1]] = pattern.Length;
             }
 
-            table.Add('*', pattern.Length);
+            // Добавляем символ '*' если он ещё не был добавлен
+            if (!table.ContainsKey('*'))
+            {
+                table.Add('*', pattern.Length);
+            }
+            
             return table;
         }
 
         // Метод для поиска индексов
-        public List<int> GetIndexes(string text, string pattern)
+        public (List<int>, int) GetIndexes(string text, string pattern)
         {
             List<int> result = new List<int>();
             int textLen = text.Length;
             int patternLen = pattern.Length;
+            int stepCount = 0; // Счётчик шагов
 
             int currentPosition = 0;
             while (currentPosition <= textLen - patternLen)
             {
                 int indexPattern = patternLen - 1;
+                
                 while (indexPattern >= 0 && text[currentPosition + indexPattern] == pattern[indexPattern])
                 {
+                    stepCount++;
                     indexPattern--;
                 }
+                
                 if (indexPattern < 0)
                 {
                     result.Add(currentPosition);
@@ -63,6 +66,8 @@ namespace Algorithm
                 }
                 else
                 {
+                    stepCount++;
+                    
                     if (_tableOffset.ContainsKey(text[currentPosition + patternLen - 1]))
                     {
                         currentPosition += _tableOffset[text[currentPosition + patternLen - 1]];
@@ -73,7 +78,7 @@ namespace Algorithm
                     }
                 }
             }
-            return result;
+            return (result, stepCount);
         }
     }
 }

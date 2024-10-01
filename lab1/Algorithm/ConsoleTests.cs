@@ -59,7 +59,20 @@ namespace Algorithm
             {
                 Console.WriteLine($"Размер матрицы: {result.size}, Среднее время: {result.averageTime} мс");
             }
+            
+            AutoTesterString autoTester = new AutoTesterString();
 
+            // Тестирование поиска подстроки
+            List<(int StringLength, int Steps)> results = autoTester.TestSubstringSearch(
+                stringGenerationOperation: length => new DataGenerator().GenerateString(length),
+                substringSearchOperation: (text, pattern) => new AlgorithmBMHPersonal(text, pattern).GetIndexes(text, pattern), 100, 20, 10);
+            
+            Console.WriteLine("\nТестирование поиска подстроки:");
+            foreach (var result in results)
+            {
+                Console.WriteLine($"Длина строки: {result.StringLength}, Количество шагов: {result.Steps}");
+            }
+            
             Console.WriteLine("\nТестирование завершено.");
         }
     }
