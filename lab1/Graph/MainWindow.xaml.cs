@@ -14,8 +14,7 @@ namespace Graph
         private MatrixTester matrixTester = new MatrixTester();
         private PowerTester powerTester = new PowerTester();
         private PolynomialTester polynomialTester = new PolynomialTester();
-
-        // Добавляем поля для хранения данных
+        
         private double[] dataSizes;
         private double[] times;
         private double[] exponents;
@@ -32,7 +31,6 @@ namespace Graph
             this.Loaded += MainWindow_Loaded;
         }
         
-        // Этот метод будет вызван после полной загрузки окна
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             selectedCategory = "Sorting";
@@ -49,35 +47,36 @@ namespace Graph
             }
             
             AlgorithmComboBox.Items.Clear();
-
-            // В зависимости от выбранной категории (selectedCategory) добавляем алгоритмы
+            
             if (selectedCategory == "Sorting")
             {
-                AlgorithmComboBox.Items.Add("Bubble sort");
-                AlgorithmComboBox.Items.Add("Quick sort");
-                AlgorithmComboBox.Items.Add("TimSort");
+                AlgorithmComboBox.Items.Add("Сортировка пузырьком");
+                AlgorithmComboBox.Items.Add("Быстрая сортировка");
+                AlgorithmComboBox.Items.Add("Гибридная сортировка");
+                AlgorithmComboBox.Items.Add("Блинная Сортировка");
             }
             else if (selectedCategory == "Math")
             {
-                AlgorithmComboBox.Items.Add("ConstFunction");
-                AlgorithmComboBox.Items.Add("SumNumbers");
-                AlgorithmComboBox.Items.Add("MultiplyNumbers");
+                AlgorithmComboBox.Items.Add("Постоянная функция");
+                AlgorithmComboBox.Items.Add("Сумма Элементов");
+                AlgorithmComboBox.Items.Add("Умножение элементов");
             }
             else if (selectedCategory == "Matrix")
             {
-                AlgorithmComboBox.Items.Add("MatrixMultiply");
+                AlgorithmComboBox.Items.Add("Умножение матриц");
             }
             else if (selectedCategory == "Power")
             {
-                AlgorithmComboBox.Items.Add("SimplePow");
-                AlgorithmComboBox.Items.Add("RecPow");
-                AlgorithmComboBox.Items.Add("QuickPowFaster");
-                AlgorithmComboBox.Items.Add("QuickPowClassic");
+                AlgorithmComboBox.Items.Add("Простое взведение");
+                AlgorithmComboBox.Items.Add("Рекурсивное возведение");
+                AlgorithmComboBox.Items.Add("Быстрое возведение");
+                AlgorithmComboBox.Items.Add("Классическое быстрое возведение");
+                
             }
             else if (selectedCategory == "Polynomial")
             {
-                AlgorithmComboBox.Items.Add("HornerPolynomial");
-                AlgorithmComboBox.Items.Add("NaivePolynomial");
+                AlgorithmComboBox.Items.Add("Прямое вычисление");
+                AlgorithmComboBox.Items.Add("Схема горнера");
             }
 
             // Устанавливаем первый элемент как выбранный
@@ -142,8 +141,7 @@ namespace Graph
                 MaxDataTextBox.Clear();
                 RepetitionsTextBox.Clear();
                 StepSizeTextBox.Clear();
-
-                // Изменяем текстовые метки для степенных операций
+                
                 if (selectedCategory == "Power")
                 {
                     FirstTextBlock.Text = "Максимальная степень";
@@ -152,7 +150,6 @@ namespace Graph
                 }
                 else
                 {
-                    // Возвращаем текстовые метки к исходным значениям для других категорий
                     FirstTextBlock.Text = "Максимальное количество данных";
                     SecondTextBlock.Text = "Количество повторов";
                     ThirdextBlock.Text = "Шаг увеличения данных";

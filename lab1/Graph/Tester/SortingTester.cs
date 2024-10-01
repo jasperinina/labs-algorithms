@@ -6,32 +6,36 @@ namespace Graph.Tester;
 public class SortingTester
 {
     private AutoTesterOther tester = new AutoTesterOther();
-
-    // Списки для хранения данных для графиков
+    
     private List<int> dataSizes = new List<int>();
     private List<double> times = new List<double>();
 
     public void Test(string algorithm, int maxData, int stepSize, int repetitions)
     {
-        // Очищаем предыдущие данные
         dataSizes.Clear();
         times.Clear();
 
-        if (algorithm == "Bubble sort")
+        if (algorithm == "Сортировка пузырьком")
         {
             BubbleSort bubbleSort = new BubbleSort();
             var sortResults = tester.TestSortingOperation(bubbleSort, maxData, stepSize, repetitions);
             StoreResults(sortResults);
         }
-        else if (algorithm == "Quick sort")
+        else if (algorithm == "Быстрая сортировка")
         {
             QuickSort quickSort = new QuickSort();
             var sortResults = tester.TestSortingOperation(quickSort, maxData, stepSize, repetitions);
             StoreResults(sortResults);
         }
-        else if (algorithm == "TimSort")
+        else if (algorithm == "Гибридная сортировка")
         {
             TimSort timSort = new TimSort();
+            var sortResults = tester.TestSortingOperation(timSort, maxData, stepSize, repetitions);
+            StoreResults(sortResults);
+        }
+        else if (algorithm == "Блинная Сортировка")
+        {
+            PancakeSortPersonal timSort = new PancakeSortPersonal();
             var sortResults = tester.TestSortingOperation(timSort, maxData, stepSize, repetitions);
             StoreResults(sortResults);
         }

@@ -6,18 +6,16 @@ namespace Graph.Tester;
 public class MatrixTester
 {
     private AutoTesterOther tester = new AutoTesterOther();
-
-    // Списки для хранения данных для графиков
+    
     private List<int> dataSizes = new List<int>();
     private List<double> times = new List<double>();
 
     public void Test(string algorithm, int maxData, int stepSize, int repetitions)
     {
-        // Очищаем предыдущие данные
         dataSizes.Clear();
         times.Clear();
 
-        if (algorithm == "MatrixMultiply")
+        if (algorithm == "Умножение матриц")
         {
             MatrixOperations matrixOps = new MatrixOperations();
             var matrixResults = tester.TestMatrixOperation(matrixOps.MatrixMultiply, maxData, stepSize, repetitions);

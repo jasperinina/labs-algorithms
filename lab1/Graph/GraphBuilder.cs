@@ -15,13 +15,10 @@ public class GraphBuilder
     // Метод для построения графика времени vs. размера данных
     public void PlotTimeVsDataSize(double[] sizes, double[] timeResults)
     {
-        // Очищаем предыдущие графики
         wpfPlot.Plot.Clear();
-
-        // Добавляем scatter график
+        
         wpfPlot.Plot.Add.Scatter(sizes, timeResults);
-
-        // Устанавливаем названия осей
+        
         wpfPlot.Plot.XLabel("Размер данных");
         wpfPlot.Plot.YLabel("Время (секунды)");
         
@@ -30,21 +27,17 @@ public class GraphBuilder
         
         wpfPlot.Plot.Axes.Bottom.Min = 0;
         wpfPlot.Plot.Axes.Bottom.Max = 1000;
-
-        // Обновляем график
+        
         wpfPlot.Refresh();
     }
 
     // Метод для построения графика шагов vs. степени
     public void PlotStepsVsExponent(double[] exponents, double[] stepResults)
     {
-        // Очищаем предыдущие графики
         wpfPlot.Plot.Clear();
-
-        // Добавляем scatter график
+        
         wpfPlot.Plot.Add.Scatter(exponents, stepResults);
-
-        // Устанавливаем названия осей
+        
         wpfPlot.Plot.XLabel("Степень");
         wpfPlot.Plot.YLabel("Количество шагов");
         
@@ -53,8 +46,7 @@ public class GraphBuilder
         
         wpfPlot.Plot.Axes.Bottom.Min = 0;
         wpfPlot.Plot.Axes.Bottom.Max = 50000;
-
-        // Обновляем график
+        
         wpfPlot.Refresh();
     }
 }

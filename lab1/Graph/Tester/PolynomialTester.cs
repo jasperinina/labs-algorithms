@@ -6,24 +6,22 @@ namespace Graph.Tester;
 public class PolynomialTester
 {
     private AutoTesterOther tester = new AutoTesterOther();
-
-    // Списки для хранения данных для графиков
+    
     private List<int> dataSizes = new List<int>();
     private List<double> times = new List<double>();
 
     public void Test(string algorithm, int maxData, int stepSize, int repetitions)
     {
-        // Очищаем предыдущие данные
         dataSizes.Clear();
         times.Clear();
 
-        if (algorithm == "HornerPolynomial")
+        if (algorithm == "Схема горнера")
         {
             HornerPolynomial hornerPolynomial = new HornerPolynomial();
             var polyResults = tester.TestPolynomialOperation(hornerPolynomial, maxData, stepSize, repetitions);
             StoreResults(polyResults);
         }
-        else if (algorithm == "NaivePolynomial")
+        else if (algorithm == "Прямое вычисление")
         {
             NaivePolynomial naivePolynomial = new NaivePolynomial();
             var polyResults = tester.TestPolynomialOperation(naivePolynomial, maxData, stepSize, repetitions);

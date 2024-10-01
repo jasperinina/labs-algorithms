@@ -5,26 +5,20 @@
         Title="Визуализация Алгоритмов" 
         Height="900" Width="1600" ResizeMode="CanResize">
     <Window.Resources>
-        <!-- Подключение шрифта Regular -->
+        <!-- Подключение шрифта -->
         <FontFamily x:Key="EuclidSquareRegular">/Graph;component/Font/EuclidSquare-Regular.ttf#Euclid Square</FontFamily>
-        <!-- Подключение шрифта Bold -->
         <FontFamily x:Key="EuclidSquareSemiBoldBold">/Graph;component/Font/EuclidSquare-SemiBold.ttf#Euclid Square</FontFamily>
+        
         <!-- Стиль для RadioButton -->
         <Style TargetType="RadioButton">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <!-- Контейнер для радиокнопки -->
                         <Grid Width="30" Height="30">
-                            <!-- Внешний круг радиокнопки -->
-                            <Ellipse x:Name="outerCircle" Width="24" Height="24" Stroke="Gray" StrokeThickness="1" Fill="#F5F5F5"/>
-
-                            <!-- Черный кружок для выбранной радиокнопки -->
+                            <Ellipse x:Name="outerCircle" Width="24" Height="24" Stroke="#C3C3C3" StrokeThickness="1" Fill="#F5F5F5"/>
                             <Ellipse x:Name="innerCircle" Width="16" Height="16" Fill="#1F77B4" Visibility="Collapsed"/>
                         </Grid>
-
-                        <!-- Текст для радиокнопки -->
                         <TextBlock Text="{TemplateBinding Content}" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
@@ -33,18 +27,19 @@
                         <!-- Триггер для состояния IsChecked = True -->
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="innerCircle" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="outerCircle" Property="Stroke" Value="Gray"/>
+                            <Setter TargetName="outerCircle" Property="Stroke" Value="#C3C3C3"/>
                         </Trigger>
                         <!-- Триггер для состояния IsChecked = False -->
                         <Trigger Property="IsChecked" Value="False">
                             <Setter TargetName="innerCircle" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="outerCircle" Property="Stroke" Value="Gray"/>
+                            <Setter TargetName="outerCircle" Property="Stroke" Value="#C3C3C3"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+        
         <Style TargetType="ComboBox">
             <!-- Установка размера шрифта для ComboBox -->
             <Setter Property="FontSize" Value="16"/>
@@ -53,17 +48,13 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <!-- Задний фон ComboBox -->
                             <Border x:Name="border" 
                                     Background="White" 
                                     CornerRadius="10" 
                                     SnapsToDevicePixels="True">
                                 <Grid>
-                                    <!-- Определение колонок -->
                                     <Grid.ColumnDefinitions>
-                                        <!-- Первая колонка для текста занимает всё доступное пространство -->
                                         <ColumnDefinition Width="*" />
-                                        <!-- Вторая колонка фиксированной ширины для стрелки -->
                                         <ColumnDefinition Width="40"/>
                                     </Grid.ColumnDefinitions>
 
@@ -80,7 +71,7 @@
                                                       RecognizesAccessKey="True"
                                                       Grid.Column="0"/>
 
-                                    <!-- Обертывание ToggleButton в Border для увеличения области нажатия -->
+                                    <!-- Обертывание ToggleButton -->
                                     <Border Grid.Column="1" 
                                             Width="40" 
                                             Height="30" 
@@ -114,7 +105,7 @@
                                 <Border x:Name="popupBorder" 
                                         Background="White" 
                                         CornerRadius="10" 
-                                        BorderBrush="White" 
+                                        BorderBrush="#C3C3C3" 
                                         BorderThickness="1">
                                     <ScrollViewer Margin="4" SnapsToDevicePixels="True">
                                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
@@ -137,8 +128,8 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/> <!-- Левый столбец с шириной 400px -->
-            <ColumnDefinition Width="*"/>   <!-- Правый столбец для графика -->
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/> 
         </Grid.ColumnDefinitions>
 
         <!-- Левая панель с элементами управления -->
@@ -148,16 +139,16 @@
 
 
             <!-- Радио-кнопки для выбора категорий -->
-            <RadioButton Content="Сортировка" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
-                         Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="SortingRadioButton_Checked"/>
-            <RadioButton Content="Мат. операции" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
-                         Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="MathRadioButton_Checked"/>
-            <RadioButton Content="Матричные операции" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
-                         Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="MatrixRadioButton_Checked"/>
-            <RadioButton Content="Возведение в степень" GroupName="AlgorithmType" IsChecked="True" Width="229" Height="30" FontWeight="Regular" FontSize="16" 
-                         Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="PowerRadioButton_Checked"/>
-            <RadioButton Content="Полиномы" GroupName="AlgorithmType" Width="229" IsChecked="True" Height="30" FontWeight="Regular" FontSize="16" 
-                         Margin="-130,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="PolynomialRadioButton_Checked"/>
+            <RadioButton Content="Сортировка" GroupName="AlgorithmType" IsChecked="True" Width="300" Height="30" FontWeight="Regular" FontSize="16" 
+                         Margin="-60,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="SortingRadioButton_Checked"/>
+            <RadioButton Content="Математические операции" GroupName="AlgorithmType" IsChecked="True" Width="300" Height="30" FontWeight="Regular" FontSize="16" 
+                         Margin="-60,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="MathRadioButton_Checked"/>
+            <RadioButton Content="Матричные операции" GroupName="AlgorithmType" IsChecked="True" Width="300" Height="30" FontWeight="Regular" FontSize="16" 
+                         Margin="-60,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="MatrixRadioButton_Checked"/>
+            <RadioButton Content="Возведение в степень" GroupName="AlgorithmType" IsChecked="True" Width="300" Height="30" FontWeight="Regular" FontSize="16" 
+                         Margin="-60,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="PowerRadioButton_Checked"/>
+            <RadioButton Content="Полиномы" GroupName="AlgorithmType" Width="300" IsChecked="True" Height="30" FontWeight="Regular" FontSize="16" 
+                         Margin="-60,0,0,10" FontFamily="{StaticResource EuclidSquareRegular}" Checked="PolynomialRadioButton_Checked"/>
 
             <!-- Выпадающий список для выбора алгоритма -->
             <TextBlock Text="Выберите алгоритм" Width="240" Height="24" FontWeight="SemiBold" FontSize="20" Margin="-130,20,0,10" FontFamily="{StaticResource EuclidSquareSemiBold}"/>
@@ -171,7 +162,6 @@
             </ComboBox>
 
             <!-- Поля ввода данных -->
-            
             <TextBlock Text="Введите параметры тестирования" Width="350" Height="24" FontWeight="SemiBold" FontSize="20" Margin="-20,30,0,10" FontFamily="{StaticResource EuclidSquareSemiBold}"/>
 
             <StackPanel Name="InputFieldsPanel" Margin="20,10,0,0">
@@ -180,7 +170,7 @@
                            FontFamily="{StaticResource EuclidSquareRegular}" 
                            FontSize="14" 
                            FontWeight="Regular" 
-                           Margin="0,0,0,5"/> <!-- Добавлен нижний отступ -->
+                           Margin="0,0,0,5"/> 
 
                 <Border CornerRadius="10" 
                         Background="White" 
@@ -198,9 +188,7 @@
                              IsReadOnly="False" 
                              AllowDrop="True"/>
                 </Border>
-
-
-                <!-- Текстовое поле для количества экспериментов -->
+                
                 <TextBlock Name="SecondTextBlock" 
                            Text="Количество экспериментов" 
                            FontFamily="{StaticResource EuclidSquareRegular}" 
@@ -224,8 +212,7 @@
                          IsReadOnly="False" 
                          AllowDrop="True"/>
                 </Border>
-
-                <!-- Текстовое поле для шага увеличения данных -->
+                
                 <TextBlock Name="ThirdextBlock" 
                            Text="Шаг увеличения данных" 
                            FontFamily="{StaticResource EuclidSquareRegular}" 
@@ -275,7 +262,7 @@
             </StackPanel>
         </StackPanel>
 
-        <!-- График будет отображаться в правой колонке -->
+        <!-- График в правой колонке -->
         <wpf:WpfPlot Grid.Column="1" x:Name="wpfPlot" Width="1100" Height="800" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

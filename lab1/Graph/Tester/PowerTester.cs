@@ -6,36 +6,34 @@ namespace Graph.Tester;
 public class PowerTester
 {
     private AutoTesterPower tester = new AutoTesterPower();
-
-    // Списки для хранения данных для графиков
+    
     private List<int> exponents = new List<int>();
     private List<int> steps = new List<int>();
 
     public void Test(string algorithm, int baseValue, int maxExponent, int exponentStep)
     {
-        // Очищаем предыдущие данные
         exponents.Clear();
         steps.Clear();
 
-        if (algorithm == "SimplePow")
+        if (algorithm == "Простое взведение")
         {
             SimplePow simplePow = new SimplePow();
             var powerResults = tester.TestPowerOperation(simplePow.CalculatePower, maxExponent, exponentStep, baseValue);
             StoreResults(powerResults);
         }
-        else if (algorithm == "RecPow")
+        else if (algorithm == "Рекурсивное возведение")
         {
             RecPow recPow = new RecPow();
             var powerResults = tester.TestPowerOperation(recPow.CalculatePower, maxExponent, exponentStep, baseValue);
             StoreResults(powerResults);
         }
-        else if (algorithm == "QuickPowFaster")
+        else if (algorithm == "Быстрое возведение")
         {
             QuickPowFaster quickPowFaster = new QuickPowFaster();
             var powerResults = tester.TestPowerOperation(quickPowFaster.CalculatePower, maxExponent, exponentStep, baseValue);
             StoreResults(powerResults);
         }
-        else if (algorithm == "QuickPowClassic")
+        else if (algorithm == "Классическое быстрое возведение")
         {
             QuickPowClassic quickPowClassic = new QuickPowClassic();
             var powerResults = tester.TestPowerOperation(quickPowClassic.CalculatePower, maxExponent, exponentStep, baseValue);
