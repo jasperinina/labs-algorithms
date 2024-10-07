@@ -2,9 +2,8 @@
 
 public class ConstFunction : BasicOperation
 {
-    // Возвращение последнего элемента массива
     public override long PerformOperation(params int[] args)
     {
-        return args[args.Length - 1];
+        return 5;
     }
 }
