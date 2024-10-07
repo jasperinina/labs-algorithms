@@ -26,7 +26,7 @@ public class GraphBuilder
         wpfPlot.Plot.Axes.Left.Max = 1;
         
         // Настройка максимальных значений осей (динамически)
-        wpfPlot.Plot.Axes.Left.Max = timeResults.Max() * 100;
+        wpfPlot.Plot.Axes.Left.Max = timeResults.Max();
         wpfPlot.Plot.Axes.Bottom.Max = sizes.Max();
 
         
