@@ -238,10 +238,10 @@ namespace Graph
             }
         }
         
-        // Методы для получения данных из текстовых полей
+       // Методы для получения данных из текстовых полей
         private int GetMaxData()
         {
-            if (int.TryParse(MaxDataTextBox.Text, out int result))
+            if ((int.TryParse(MaxDataTextBox.Text, out int result)) && (result >= 1 && result <= 10000))
                 return result;
             else
                 throw new ArgumentException("Некорректный ввод для максимального количества данных");
@@ -249,15 +249,20 @@ namespace Graph
 
         private int GetStepSize()
         {
-            if (int.TryParse(StepSizeTextBox.Text, out int result))
-                return result;
-            else
+            if (int.TryParse(MaxDataTextBox.Text, out int maxData))
+            {
+                if (int.TryParse(StepSizeTextBox.Text, out int result) && result >= 1 && result <= maxData - 10) 
+                    return result;
+                else 
+                    throw new ArgumentException("Некорректный ввод для шага увеличения данных");
+            }
+            else 
                 throw new ArgumentException("Некорректный ввод для шага увеличения данных");
         }
 
         private int GetRepetitions()
         {
-            if (int.TryParse(RepetitionsTextBox.Text, out int result))
+            if (int.TryParse(RepetitionsTextBox.Text, out int result) && result >= 1 && result <= 100)
                 return result;
             else
                 throw new ArgumentException("Некорректный ввод для количества повторов");
@@ -266,7 +271,7 @@ namespace Graph
         // Методы для степенных операций
         private int GetBaseValue()
         {
-            if (int.TryParse(RepetitionsTextBox.Text, out int result))
+            if (int.TryParse(RepetitionsTextBox.Text, out int result) && result >= 1 && result <= 100)
                 return result;
             else
                 throw new ArgumentException("Некорректный ввод для основания степени");
@@ -274,7 +279,7 @@ namespace Graph
 
         private int GetMaxExponent()
         {
-            if (int.TryParse(MaxDataTextBox.Text, out int result))
+            if (int.TryParse(MaxDataTextBox.Text, out int result) && result >= 1 && result <= 50000)
                 return result;
             else
                 throw new ArgumentException("Некорректный ввод для максимальной степени");
@@ -282,34 +287,49 @@ namespace Graph
 
         private int GetExponentStep()
         {
-            if (int.TryParse(StepSizeTextBox.Text, out int result))
-                return result;
-            else
+            if (int.TryParse(MaxDataTextBox.Text, out int maxData))
+            {
+                if (int.TryParse(StepSizeTextBox.Text, out int result) && result >= 1 && result <= maxData - 10) 
+                    return result;
+                else 
+                    throw new ArgumentException("Некорректный ввод для шага увеличения степени");
+            }
+            else 
                 throw new ArgumentException("Некорректный ввод для шага увеличения степени");
         }
         
         // Методы для степенных операций
-        private int GetSubstringLength()
-        {
-            if (int.TryParse(RepetitionsTextBox.Text, out int result))
-                return result;
-            else
-                throw new ArgumentException("Некорректный ввод для длинны подстроки");
-        }
-
         private int GetStringLength()
         {
-            if (int.TryParse(MaxDataTextBox.Text, out int result))
+            if (int.TryParse(MaxDataTextBox.Text, out int result)&& result >= 1 && result <= 100000)
                 return result;
             else
                 throw new ArgumentException("Некорректный ввод для максимальной длинны строки");
         }
+        
+        private int GetSubstringLength()
+        {
+            if (int.TryParse(MaxDataTextBox.Text, out int maxData))
+            {
+                if (int.TryParse(RepetitionsTextBox.Text, out int result) && result >= 1 && result <= maxData / 2) 
+                    return result;
+                else 
+                    throw new ArgumentException("Некорректный ввод для длинны подстроки");
+            }
+            else 
+                throw new ArgumentException("Некорректный ввод для длинны подстроки");
+        }
 
         private int GetLengthStep()
         {
-            if (int.TryParse(StepSizeTextBox.Text, out int result))
-                return result;
-            else
+            if (int.TryParse(MaxDataTextBox.Text, out int maxData))
+            {
+                if (int.TryParse(StepSizeTextBox.Text, out int result) && result >= 1 && result <= maxData - 10) 
+                    return result;
+                else 
+                    throw new ArgumentException("Некорректный ввод для шага увеличения строки");
+            }
+            else 
                 throw new ArgumentException("Некорректный ввод для шага увеличения строки");
         }
     }
